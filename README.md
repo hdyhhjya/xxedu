@@ -14,7 +14,16 @@
   - 维护学生成绩（包括查看学生本学期已有成绩、新增学生成绩、修改学生成绩）
 ## 数据库设计
 - 初始版本  
-![image](https://github.com/hdyhhjya/images/blob/master/school_db.png)
+  - class (<u>id</u>, grade, number, school_id)
+  - course (<u>id</u>, full_score, excellent_score, passing_score, teacher_id, subject_id, semester_id, class_id)
+  - course_time (<u>id</u>, weekday, number, course_id)
+  - school (<u>id</u>, name, address)
+  - score (<u>student_id, course_id</u>, score)
+  - semester (<u>id</u>, name, start_date, end_date, school_id)
+  - student (<u>id</u>, name, gender, birthday, class_id)
+  - subject (<u>id</u>, name)
+  - teacher (<u>id</u>, name, email, school_id)
+  - user (<u>id</u>, username, password, teacher_id)
 ## 开发环境
 - Windows 10
 - IntelliJ IDEA 2020.1.3
