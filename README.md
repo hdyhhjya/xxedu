@@ -37,5 +37,6 @@
 - Lombok
 - Mybatis Framework
 - Mysql Driver
+- Druid
 - PageHelper
 - Thymeleaf
