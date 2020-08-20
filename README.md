@@ -14,7 +14,7 @@
   - 维护学生成绩（包括查看学生本学期已有成绩、新增学生成绩、修改学生成绩）
 ## 数据库设计
 - 初始版本
-图片: https://uploader.shimo.im/f/wJ8IeyNYnaEy6WmN.png
+![image](https://github.com/hdyhhjya/images/blob/master/school_db.png)
 ## 开发环境
 - Windows 10
 - IntelliJ IDEA 2020.1.3
