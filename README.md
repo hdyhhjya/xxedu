@@ -13,7 +13,7 @@
   - 维护学生信息（包括增删改查）
   - 维护学生成绩（包括查看学生本学期已有成绩、新增学生成绩、修改学生成绩）
 ## 数据库设计
-- 初始版本
+- 初始版本  
 ![image](https://github.com/hdyhhjya/images/blob/master/school_db.png)
 ## 开发环境
 - Windows 10
