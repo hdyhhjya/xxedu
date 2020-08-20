@@ -1,4 +1,5 @@
 # 教学管理平台xxedu（教师端）
+![页面展示截图：教师用户首页](https://github.com/hdyhhjya/xxedu/blob/master/example.png)
 ## 业务需求
 - 管理员
   - 登录
