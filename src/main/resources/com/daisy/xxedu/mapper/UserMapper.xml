@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daisy.xxedu.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.daisy.xxedu.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="teacher_id" jdbcType="INTEGER" property="teacherId"/>
+    </resultMap>
+
+    <select id="getTeacherIdByUserId" parameterType="Long" resultType="Long">
+        select teacher_id
+        from user
+        where id = #{id}
+    </select>
+
+    <select id="findByUsername" parameterType="String" resultType="com.daisy.xxedu.entity.User">
+        select id, username, password, teacher_id
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="getTeacherUsers" resultType="com.daisy.xxedu.entity.User">
+        select id, username, password, teacher_id
+        from user
+        where teacher_id IS NOT NULL
+    </select>
+
+    <insert id="insert" parameterType="com.daisy.xxedu.entity.User" keyProperty="id" useGeneratedKeys="true">
+        insert into user (username, password, teacher_id)
+        values (#{username}, #{password}, #{teacherId})
+    </insert>
+
+    <update id="updatePassword">
+        update user
+        set password=#{password}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from user
+        where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daisy.xxedu.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.daisy.xxedu.entity.Student">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="class_id" jdbcType="INTEGER" property="classId"/>
+    </resultMap>
+
+    <select id="getStudentsByClassId" parameterType="java.lang.Long" resultType="com.daisy.xxedu.entity.Student">
+        select id, name, gender, birthday, class_id
+        from student
+        where class_id=#{classId}
+    </select>
+
+    <select id="getStudentById" parameterType="java.lang.Long" resultType="com.daisy.xxedu.entity.Student">
+        select id, name, gender,birthday, class_id
+        from student
+        where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.daisy.xxedu.entity.Student" keyProperty="id" useGeneratedKeys="true">
+        insert into student(id, name, gender, birthday, class_id)
+        values (#{id}, #{name}, #{gender}, #{birthday}, #{classId})
+    </insert>
+
+    <update id="update" parameterType="com.daisy.xxedu.entity.Student">
+        update student
+        set
+            name = #{name},
+            gender = #{gender},
+            birthday = #{birthday}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from student
+        where id=#{id}
+    </delete>
+
+</mapper>

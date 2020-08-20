@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daisy.xxedu.mapper.ScoreMapper">
+    <resultMap id="BaseResultMap" type="com.daisy.xxedu.entity.Score">
+        <id column="student_id" jdbcType="INTEGER" property="studentId"/>
+        <result column="course_id" jdbcType="INTEGER" property="courseId"/>
+        <result column="score" jdbcType="DECIMAL" property="score"/>
+    </resultMap>
+
+    <select id="getScoreByStudentCourseId" resultType="java.math.BigDecimal">
+        select score
+        from score
+        where student_id=#{studentId} and course_id=#{courseId}
+    </select>
+
+    <select id="getScoreCountByCourseId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(score)
+        from score
+        where course_id=#{courseId}
+    </select>
+
+    <insert id="save" parameterType="com.daisy.xxedu.entity.Score">
+        insert into score(student_id, course_id, score)
+        values (#{studentId}, #{courseId}, #{score})
+    </insert>
+
+    <update id="update" parameterType="com.daisy.xxedu.entity.Score">
+        update score
+        set score=#{score}
+        where student_id=#{studentId} and course_id=#{courseId}
+    </update>
+
+    <delete id="delete">
+        delete from score
+        where student_id = #{studentId} and course_id=#{courseId}
+    </delete>
+
+</mapper>

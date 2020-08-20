@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daisy.xxedu.mapper.SchoolMapper">
+    <resultMap id="BaseResultMap" type="com.daisy.xxedu.entity.School">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+
+    <select id="getSchoolById" parameterType="java.lang.Long" resultType="com.daisy.xxedu.entity.School">
+        select id, name, address
+        from school
+        where id = #{id}
+    </select>
+
+    <select id="getSchools" resultType="com.daisy.xxedu.entity.School">
+        select id, name, address
+        from school
+    </select>
+
+    <insert id="insert" parameterType="com.daisy.xxedu.entity.School" keyProperty="id" useGeneratedKeys="true">
+        insert into school(id, name, address)
+        values (#{id}, #{name}, #{address})
+    </insert>
+
+    <update id="updateSchool" parameterType="com.daisy.xxedu.entity.School">
+        update school
+        set name = #{name},
+            address = #{address}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from school
+        where id = #{id}
+    </delete>
+
+</mapper>

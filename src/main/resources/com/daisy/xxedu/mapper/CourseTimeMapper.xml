@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daisy.xxedu.mapper.CourseTimeMapper">
+    <resultMap id="BaseResultMap" type="com.daisy.xxedu.entity.CourseTime">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="weekday" jdbcType="TINYINT" property="weekday"/>
+        <result column="number" jdbcType="TINYINT" property="number"/>
+        <result column="course_id" jdbcType="INTEGER" property="courseId"/>
+    </resultMap>
+
+    <select id="getCourseTimeByCourseId" parameterType="java.lang.Long" resultType="com.daisy.xxedu.entity.CourseTime">
+        select id, weekday, number, course_id
+        from course_time
+        where course_id = #{courseId}
+    </select>
+
+    <insert id="save" parameterType="com.daisy.xxedu.entity.CourseTime" keyProperty="id" useGeneratedKeys="true">
+        insert into course_time(id, weekday, number, course_id)
+        values (#{id}, #{weekday}, #{number}, #{courseId})
+    </insert>
+
+    <delete id="deleteByCourseId" parameterType="java.lang.Long">
+        delete from course_time
+        where course_id = #{courseId}
+    </delete>
+</mapper>

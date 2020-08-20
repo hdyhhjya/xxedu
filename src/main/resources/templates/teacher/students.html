@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>学生信息</title>
+    <style>
+        .div-classes {
+            width: 80%;
+            padding: 15px;
+            margin: auto;
+        }
+        .form-test {
+            margin:0px 0px 10px 0px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <a class="navbar-brand" href="#">教学管理平台</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link" th:href="@{courses}">我的课表</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{classes}">我的班级<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{semesters}">学期管理</a>
+            </li>
+        </ul>
+        <!--        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" th:text="${username}">username</a>-->
+        <span th:text="${username}" class="navbar-text"></span>
+        <form method="POST" th:action="@{/logout}" class="form-inline my-2 my-lg-0">
+            <button class="btn btn-sm btn-outline-secondary" type="submit">登出</button>
+        </form>
+    </div>
+</nav>
+
+<div class="div-classes">
+    <form method="POST" th:action="@{newStudent}" class="form-inline form-test">
+        <div class="form-group mr-sm-2">
+            <input type="text" pattern="[1-9][0-9]{0,2}" name="studentCount" class="form-control" placeholder="新增学生人数">
+        </div>
+        <input type="hidden" name="classId" th:value="${classId}"/>
+        <input type="hidden" name="className" th:value="${className}"/>
+        <input type="submit" class="btn btn-outline-info" value="新增学生信息"/>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">班级</th>
+            <th scope="col">姓名</th>
+            <th scope="col">性别</th>
+            <th scope="col">出生日期</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student: ${students}">
+            <th scope="row" th:text="${studentStat.count}">COUNT</th>
+            <td th:text="${className}">CLASS</td>
+            <td th:text="${student.name}">NAME</td>
+            <td th:text="${student.gender}==1 ? '男' : '女' ">GENDER</td>
+            <td th:text="${#dates.format(student.birthday,'yyyy-MM-dd')}">BIRTHDAY</td>
+            <td class="row">
+                <form method="GET" th:action="@{updateStudent}">
+                    <input type="hidden" name="studentId" th:value="${student.id}"/>
+                    <input type="submit" value="修改" class="btn btn-outline-secondary btn-sm"/>
+                </form>
+                <form method="POST" th:action="@{deleteStudent}">
+                    <input type="hidden" name="studentId" th:value="${student.id}"/>
+                    <input type="hidden" name="classId" th:value="${classId}"/>
+                    <input type="submit" value="删除" class="btn btn-outline-secondary btn-sm"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</body>
+</html>

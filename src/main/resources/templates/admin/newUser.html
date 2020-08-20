@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>新增用户</title>
+
+    <style>
+        .form-insert {
+            width: 60%;
+            max-width: 440px;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <a class="navbar-brand" href="#">教学管理平台</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/admin/users}">用户信息 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{schools}">学校信息</a>
+            </li>
+        </ul>
+        <!--        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" th:text="${username}">username</a>-->
+        <span th:text="${username}" class="navbar-text"></span>
+        <form method="POST" th:action="@{/logout}" class="form-inline my-2 my-lg-0">
+            <button class="btn btn-sm btn-outline-secondary" type="submit">登出</button>
+        </form>
+    </div>
+</nav>
+
+
+    <form method="POST" th:action="@{register}" id="registerForm" class="form-insert">
+        <h1 class="h3 mb-3 font-weight-normal text-center">新增用户</h1>
+        <div class="form-group">
+            <label for="username">用户名：</label>
+            <input type="text" name="username" id="username" class="form-control" required autofocus pattern="[a-zA-Z,0-9]+" aria-describedby="usernameHelp"/>
+            <small id="usernameHelp" class="form-text text-muted">用户名只能包含英文或数字</small>
+        </div>
+        <div class="form-group">
+        <label for="name">姓名：</label>
+        <input type="text" name="name" id="name" class="form-control" required autofocus/>
+        </div>
+        <div class="form-group">
+        <label for="email">邮箱：</label>
+        <input type="email" name="email" id="email" class="form-control" required autofocus/>
+        </div>
+        <div class="form-group">
+        <label for="school">学校：</label>
+            <select name="schoolId" id="school" class="form-control" required autofocus>
+                <option></option>
+                <option th:each="school:${schools}" th:text="${school.name}" th:value="${school.id}">SCHOOL</option>
+            </select>
+        </div>
+        <input type="submit" value="注册" class="btn btn-primary"/>
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
